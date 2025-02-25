@@ -16,6 +16,12 @@ jobs:
     - name: Set up Azure CLI
       uses: azure/setup-azure-cli@v1  # Set up Azure CLI for interacting with Azure
 
-    - name: Upload to Azure Storage
+    - name: Deploy to Azure Storage
+      env:
+        AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
       run: |
-        az storage blob upload-batch -d \$web --account-name ${{ secrets.AZURE_STORAGE_ACCOUNT }} --account-key ${{ secrets.AZURE_STORAGE_KEY }} --source .  # Upload your site to Azure
+        az storage blob upload-batch \
+          -d '$web' \
+          -s ./public \
+          --account-name webprojectstorage1 \
+          --account-key $AZURE_STORAGE_KEY
