@@ -47,4 +47,4 @@ jobs:
         app_location: "/"
         api_location: ""
         output_location: ""
-app_build_command: ''
+skip_app_build: true 
